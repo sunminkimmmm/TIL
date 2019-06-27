@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .empty{width:30px;height:30px;border: white;background-color: white;margin: 2px 2px}
+        .seatOk{width:30px;height:30px;border: white;background-color: green;margin: 2px 2px}
+        .seatCheck{width:30px;height:30px;border:white;background-color: red;margin: 2px 2px}
+        .seatNo{width:30px;height:30px;border: white;background-color: gray;margin: 2px 2px}
+    </style>
+        <script>
+            
+            var seat = [
+                    [1,1,0,1,1,0,0,0,0,1,1,0,1,1,4],
+                    [1,1,0,1,1,1,1,1,1,1,1,0,1,1,4],
+                    [1,1,0,1,1,1,1,1,1,1,1,0,1,1,4],
+                    [1,1,0,1,1,1,1,1,1,1,1,0,1,1,4],
+                    [1,1,0,1,1,1,1,1,1,1,1,0,1,1,4],
+                    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,4],
+                    [1,1,0,1,1,1,1,1,1,1,1,0,1,1,4],
+                    [1,1,0,1,1,1,1,1,1,1,1,0,1,1,4],
+                    [1,1,0,1,1,1,1,1,1,1,1,0,1,1,4],
+                    [1,1,0,1,1,1,1,1,1,1,1,0,1,1,4]
+                ]
+                
+                function seatLocation(){
+                    document.write("<p>좌석예매 시스템</p>");
+                    document.write("<button id='btn' onclick='seatClick(id)'>예약완료</button>"+"<br>");
+                    var num=0;
+                    for(var i = 0; i<seat.length;i++){
+                        
+                        for(var j = 0; j<seat[i].length;j++){
+                            if(seat[i][j]==0){
+                                
+                                document.write("<button class='empty'></button>");
+                            
+                               
+                            }else if(seat[i][j]==1){
+                                ++num;
+                                document.write("<button id="+num+" onclick='seatClick(id)' class='seatOk'></button>");
+
+                            }else if(seat[i][j]==4){
+                                
+                                document.write("<br>");
+                                
+                                
+                            }
+
+                        }
+                    }
+                    
+                }
+                var sum = new Array();
+                function seatClick(id){
+                  
+                  sum.unshift(id);
+                    if(document.getElementById(id).className=="seatOk"){
+                        document.getElementById(id).className="seatCheck";
+                    }
+                    else if(document.getElementById(id).className=="seatCheck"){
+                        sum.splice(0,2);
+                        document.getElementById(id).className="seatOk";
+                    }
+                    else if(document.getElementById(id).id=="btn"){
+                        for(var i =1; i<sum.length; i++){
+                        document.getElementById(sum[i]).className="seatNo";
+                        
+                        }
+                        sum.splice(0,1);
+                        
+                    }
+                }
+
+               window.onload=seatLocation();
+
+            </script>
+</head>
+<body>
+        
+    
+
+</body>
+
+
+</html>
