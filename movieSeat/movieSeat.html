@@ -8,7 +8,7 @@
         .seatNo{width:30px;height:30px;border: white;background-color: gray;margin: 2px 2px}
     </style>
         <script>
-            
+            //좌석 배치
             var seat = [
                     [1,1,0,1,1,0,0,0,0,1,1,0,1,1,4],
                     [1,1,0,1,1,1,1,1,1,1,1,0,1,1,4],
@@ -27,39 +27,36 @@
                     document.write("<button id='btn' onclick='seatClick(id)'>예약완료</button>"+"<br>");
                     var num=0;
                     for(var i = 0; i<seat.length;i++){
-                        
                         for(var j = 0; j<seat[i].length;j++){
+                            //0일때 통로 생성
                             if(seat[i][j]==0){
-                                
                                 document.write("<button class='empty'></button>");
-                            
-                               
+                            //1일때 빈좌석 생성   
                             }else if(seat[i][j]==1){
                                 ++num;
                                 document.write("<button id="+num+" onclick='seatClick(id)' class='seatOk'></button>");
-
+                            //4일때 줄바꿈
                             }else if(seat[i][j]==4){
-                                
                                 document.write("<br>");
-                                
-                                
                             }
-
                         }
                     }
-                    
                 }
+
                 var sum = new Array();
+                //좌석을 클했을때 id로 좌석 구분
                 function seatClick(id){
-                  
                   sum.unshift(id);
+                    //빈좌석 선택했을때 선택된 좌석으로 바꿈
                     if(document.getElementById(id).className=="seatOk"){
                         document.getElementById(id).className="seatCheck";
                     }
+                    //선택된 좌석 선택했을때 빈좌석으로 바꿈
                     else if(document.getElementById(id).className=="seatCheck"){
                         sum.splice(0,2);
                         document.getElementById(id).className="seatOk";
                     }
+                    //예매완료 버튼 눌렸을때 선택할 수 없는 좌석으로 바꿈
                     else if(document.getElementById(id).id=="btn"){
                         for(var i =1; i<sum.length; i++){
                         document.getElementById(sum[i]).className="seatNo";
