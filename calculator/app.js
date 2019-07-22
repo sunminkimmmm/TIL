@@ -23,7 +23,7 @@ function onload() {
 }
 
 //변수와 스택 생성
-var num1,num2;
+var num1, num2;
 var stack1 = new Array();
 var stack2 = new Array();
 
@@ -32,36 +32,36 @@ var stack2 = new Array();
 function handleClick(event) {
   num1 = parseInt(result.innerHTML);
   num2 = parseInt(inputValue.value);
-  
+
   switch (event.target.id) {
     // === Undo === //
-    case 'undoButton': 
-       //스택1 pop하고 담기
-       var popNum = stack1.pop();
-       //스택2에 결과값 push
-       stack2.push(num1);
-       //결과값에 pop한 값 보여주기
-       result.innerHTML = popNum;
-       //redo버튼 보여주기
-       redoButton.disabled = false;
-       //스택1에 값이 있을때까지 undo버튼 보여주기
-       if(stack1.length==0){
-         undoButton.disabled = true;
-       }
+    case 'undoButton':
+      //스택1 pop하고 담기
+      var popNum = stack1.pop();
+      //스택2에 결과값 push
+      stack2.push(num1);
+      //결과값에 pop한 값 보여주기
+      result.innerHTML = popNum;
+      //redo버튼 보여주기
+      redoButton.disabled = false;
+      //스택1에 값이 있을때까지 undo버튼 보여주기
+      if (stack1.length == 0) {
+        undoButton.disabled = true;
+      }
       break;
 
     // === Add === //
     case 'addButton':
-        //입력값이 숫자인지 검사
-        if(Number.isInteger(num2)){
-          //input의 값은 없어진다
-          inputValue.value = null;
-          //스택1에 이전값 push
-          stack1.push(result.innerHTML);
-          result.innerHTML = num1+num2;
-          undoButton.disabled = false;
-          redoButton.disabled = true;
-      }else{
+      //입력값이 숫자인지 검사
+      if (Number.isInteger(num2)) {
+        //input의 값은 없어진다
+        inputValue.value = null;
+        //스택1에 이전값 push
+        stack1.push(result.innerHTML);
+        result.innerHTML = num1 + num2;
+        undoButton.disabled = false;
+        redoButton.disabled = true;
+      } else {
         //입력값이 숫자아니면 input값은 없어진다
         document.getElementById('inputbox').value = null;
       }
@@ -70,36 +70,36 @@ function handleClick(event) {
     // === Sub === //
     case 'subButton':
       //입력값이 숫자인지 검사
-        if(Number.isInteger(num2)){
-          //input의 값은 없어진다
-          inputValue.value = null;
-          //스택1에 결과값 push
-          stack1.push(result.innerHTML);
-          result.innerHTML = num1-num2;
-          undoButton.disabled = false;
-          redoButton.disabled = false;
-          
-        }else{
-          //입력값이 숫자아니면 input값은 없어진다
-          document.getElementById('inputbox').value = null;
-        }  
+      if (Number.isInteger(num2)) {
+        //input의 값은 없어진다
+        inputValue.value = null;
+        //스택1에 결과값 push
+        stack1.push(result.innerHTML);
+        result.innerHTML = num1 - num2;
+        undoButton.disabled = false;
+        redoButton.disabled = false;
+
+      } else {
+        //입력값이 숫자아니면 input값은 없어진다
+        document.getElementById('inputbox').value = null;
+      }
       break;
 
     // === Redo === //
     case 'redoButton':
-       //스택2의 요소 pop하고 담기
-        var popNum = stack2.pop();
-        //스택1에 이전값 push
-        stack1.push(num1);
-        //결과값에 pop한 값 보여주기
-        result.innerHTML = popNum;
-        //undo버튼 보여주기
-        undoButton.disabled = false;
-        //스택2에 값이 있을때까지 undo버튼 보여주기
-        if(stack2.length==0){
-          redoButton.disabled=true;
-        }
-        
+      //스택2의 요소 pop하고 담기
+      var popNum = stack2.pop();
+      //스택1에 이전값 push
+      stack1.push(num1);
+      //결과값에 pop한 값 보여주기
+      result.innerHTML = popNum;
+      //undo버튼 보여주기
+      undoButton.disabled = false;
+      //스택2에 값이 있을때까지 undo버튼 보여주기
+      if (stack2.length == 0) {
+        redoButton.disabled = true;
+      }
+
       break;
 
     default:
